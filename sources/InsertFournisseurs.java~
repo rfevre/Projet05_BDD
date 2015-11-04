@@ -1,0 +1,33 @@
+import java.sql.*;
+
+public class Insertion {
+    public static void main (String[] args) {
+	Connection con = null;
+	try {
+	    //Enregistrement du Driver
+	    Class.forName("org.postgresql.Driver");
+	    
+	    //Connexion a la base
+	    String url = "jdbc:postgresql://psqlserv/da2i";
+	    String nom = "fevrer";
+	    String mdp = "moi";
+	    con = DriverManager.getConnection(url,nom,mdp);
+
+	    System.out.println("connexion OK");
+
+	    Statement stmt = con.createStatement();
+	    stmt.executeUpdate("insert into CLIENTS values ('Durand','paul',10)");
+	}
+	catch(Exception e) {
+	    System.out.println(e.getMessage());
+	}
+	finally {
+	    try {
+		con.close();
+	    }
+	    catch(Exception e) {
+		System.out.println(e.getMessage());
+	    }
+	}
+    }
+}
